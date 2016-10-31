@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+  <tiles-definitions>
+  
+ <definition name="base.ecampus" template="/WEB-INF/templates/default.jsp">
+	  <put-attribute name="title" value="eCampus Home"></put-attribute>
+	   <put-attribute name="header" value="/WEB-INF/tiles/header.jsp"></put-attribute>
+	   <put-attribute name="content" value="/WEB-INF/tiles/content.jsp"></put-attribute>
+	   <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp"></put-attribute>
+ </definition>
+ 
+  <definition name="home" extends="base.ecampus">
+	  <put-attribute name="title" value="eCampus Home"></put-attribute>
+	   <put-attribute name="content" value="/WEB-INF/tiles/home.jsp"></put-attribute>
+ </definition>
+ 
+<definition name="students" extends="base.ecampus">
+	  <put-attribute name="title" value="eCampus Students"></put-attribute>
+	   <put-attribute name="content" value="/WEB-INF/tiles/students.jsp"></put-attribute>
+ </definition>
+ 
+ <definition name="login" extends="base.ecampus">
+	  <put-attribute name="title" value="eCampus Login"></put-attribute>
+	   <put-attribute name="content" value="/WEB-INF/tiles/login.jsp"></put-attribute>
+ </definition>
+ 
+  <definition name="loggedout" extends="base.ecampus">
+	  <put-attribute name="title" value="eCampus Loggedout"></put-attribute>
+	   <put-attribute name="content" value="/WEB-INF/tiles/loggedout.jsp"></put-attribute>
+ </definition>
+ 
+   <definition name="users" extends="base.ecampus">
+	  <put-attribute name="title" value="eCampus Users"></put-attribute>
+	   <put-attribute name="content" value="/WEB-INF/tiles/users.jsp"></put-attribute>
+ </definition>
+ 
+    <definition name="add-students" extends="base.ecampus">
+	  <put-attribute name="title" value="add students"></put-attribute>
+	   <put-attribute name="content" value="/WEB-INF/tiles/add-students.jsp"></put-attribute>
+ </definition>
+ 
+     <definition name="added-students" extends="base.ecampus">
+	  <put-attribute name="title" value="add students"></put-attribute>
+	   <put-attribute name="content" value="/WEB-INF/tiles/added-students.jsp"></put-attribute>
+ </definition>
+ 
+      <definition name="editsave" extends="base.ecampus">
+	  <put-attribute name="title" value="edit students"></put-attribute>
+	   <put-attribute name="content" value="/WEB-INF/tiles/useredit.jsp"></put-attribute>
+ </definition>
+
+
+    
+  </tiles-definitions>

@@ -1,0 +1,40 @@
+@CHARSET "ISO-8859-1";
+
+ 
+.formError{
+	
+	font-size:small;
+	color:red;
+	margin:7px;
+}
+
+.errorLogin{
+	
+	font-size:small;
+	color:red;
+ 
+}
+
+.titleecampus{
+	color:red;
+ 
+	
+}
+
+.jumbotron{
+	padding-top: 3px;
+    padding-bottom: 1px;
+
+}
+
+ 
+div.footer{
+	font-size:small;
+	color:red;
+}
+div.header{
+	text-align:center;
+}
+div.body{
+	padding: 30px;
+}

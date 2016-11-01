@@ -2,15 +2,16 @@
  <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>   
   
       <h1>Edit User</h1>
-<sf:form method="post" action="${pageContext.request.contextPath}/added-students" modelAttribute="user" >
+<sf:form method="post" action="${pageContext.request.contextPath}/AddORUpdate" modelAttribute="user">
 <table>
     <sf:hidden path="username" />  
+    <sf:hidden path="password" />  
 
 <tr><td>Name</td> <td>    <sf:input path="name" name="name" type="text"/><br/> <sf:errors path="name" cssClass="formError"></sf:errors></td></tr>
-<tr><td>Username </td><td><sf:input path="username" name="username" type="text" /><br/> <sf:errors path="username" cssClass="formError"> </sf:errors></td> </tr>
 <tr><td>Roll Number </td> <td><sf:input type="text"  path="rollnumber" name="rollnumber"/> </td> </tr>
-<tr><td>Password </td> <td><sf:input type="text" path="password"  name="password"/> <br/> <sf:errors path="rollnumber" cssClass="formError"></sf:errors></td> </tr>
 <tr><td>Mobile </td> <td><sf:input type="text" path="mobile"  name="mobile"/> </td> </tr>
+<tr><td>Authority </td> <td><sf:input type="text" path="authority"  name="authority"/> </td> </tr>
+
 <tr><td>Currently Student? </td> <td>
 <sf:select name="enabled" path="enabled">
   <option value="1">Yes</option>
@@ -21,6 +22,6 @@
 <td><label>Select Image : </label></td>
 <td><input type="file" name="image" value="test.jpg"/></td>
 </tr>
-<tr><td><input value="Add Student" type="submit" ></td> </tr>
+<tr><td><input value="Update user" type="submit" class="btn btn-success" ></td> </tr>
 </table>
 </sf:form>

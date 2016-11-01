@@ -17,20 +17,19 @@ public class User implements Serializable {
 	
 	private static final long serialVersionUID = 5362437768854142524L;
 	@NotBlank(message = "Username cannot be blank.")
-	@Size(min = 8, max = 15, message = "Username must be between 8 and 15 characters long.")
+	@Size(min = 5, max = 15, message = "Username must be between 8 and 15 characters long.")
 	@Pattern(regexp = "^\\w{8,}$", message = "Username can only consist of numbers, letters and the underscore character.")
 	@Id
 	@Column(name = "username")
 	private String username;
 
-	@Size(min = 5, max = 17, message = "you must have 5 to 17 characters")
 	@Column(name = "name")
 	private String name;
-	@Size(min = 5, max = 17, message = "you must have 5 to 17 characters")
-	@Column(name = "rollnumber")
-	private String rollnumber;
-
+	
+	@NotBlank(message = "Username cannot be blank.")
+	@Column(name = "password")
 	private String password;
+	private String rollnumber;
 	private String mobile;
 
 	private String image;

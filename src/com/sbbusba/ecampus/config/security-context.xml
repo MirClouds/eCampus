@@ -18,8 +18,10 @@
 	<security:http use-expressions="true">
 	<security:intercept-url pattern="/j_spring_security_logout" access="permitAll" />
 			
-				
-			
+		<security:intercept-url pattern="/add-user"
+			access="isAuthenticated()" />			
+		<security:intercept-url pattern="/added-user"
+			access="isAuthenticated()" />	
 		<security:intercept-url pattern="/add-students"
 			access="isAuthenticated()" />
 			<security:intercept-url pattern="/delete/*"
@@ -28,11 +30,10 @@
 			access="isAuthenticated()" />
 			<security:intercept-url pattern="/users"
 			access="hasRole('ROLE_ADMIN')" />
-	
-		<security:intercept-url pattern="/add-students"
-			access="isAuthenticated()" />
+	 
 		<security:intercept-url pattern="/added-students"
 			access="isAuthenticated()" />
+			
 		<security:intercept-url pattern="/loggedout"
 			access="permitAll" />
 

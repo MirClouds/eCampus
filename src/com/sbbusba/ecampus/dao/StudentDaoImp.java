@@ -56,7 +56,7 @@ public class StudentDaoImp implements StudentDao {
 	public List<User> getAllStudents() {
 
 		return jdbc
-				.query("select * from users, authorities where users.username = authorities.username AND authorities.authority='ROLE_STUDENT'",
+				.query("select * from users  where authority='ROLE_STUDENT'",
 						new RowMapper<User>() {
 
 							@Override

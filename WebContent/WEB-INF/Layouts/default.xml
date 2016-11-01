@@ -51,6 +51,10 @@
 	   <put-attribute name="content" value="/WEB-INF/tiles/useredit.jsp"></put-attribute>
  </definition>
 
-
+     <definition name="add-user" extends="base.ecampus">
+	  <put-attribute name="title" value="add users"></put-attribute>
+	   <put-attribute name="content" value="/WEB-INF/tiles/add-user.jsp"></put-attribute>
+ </definition>
+ 
     
   </tiles-definitions>

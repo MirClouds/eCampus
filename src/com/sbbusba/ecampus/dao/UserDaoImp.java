@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -19,6 +20,14 @@ import com.sbbusba.ecampus.model.User;
 public class UserDaoImp implements UserDao {
 
 	private NamedParameterJdbcTemplate jdbc;
+
+	@Autowired
+	private org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
+
+	@Autowired
+	public void setDataSource(DataSource jdbc) {
+		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
+	}
 	
 	public UserDaoImp() {
         System.out.println("Working UserDaoImp");
@@ -32,26 +41,35 @@ public class UserDaoImp implements UserDao {
 	  this.sessionFactory = sf;  
 	 } 
 
-	@Autowired
-	private org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
-
-	@Autowired
-	public void setDataSource(DataSource jdbc) {
-		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
-	}
 
 	public List<User> getAllUser() {
 
 		return jdbc
-				.query("select * from users,authorities where users.username=authorities.username",
+				.query("select * from users where authority != 'ROLE_ADMIN'",
 						BeanPropertyRowMapper.newInstance(User.class));
 	}
 
 	@Override
-	public String createUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean createUser(User student) {
+
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("name", student.getName());
+		params.addValue("username", student.getUsername());
+		params.addValue("password",
+				passwordEncoder.encode(student.getPassword()));
+
+		params.addValue("rollnumber", student.getRollnumber());
+		params.addValue("mobile", student.getMobile());
+		params.addValue("enabled", student.getEnabled());
+		params.addValue("authority", student.getAuthority());
+		params.addValue("image", student.getImage());
+
+		
+		return jdbc.update(
+				"insert into users (name, username, password, rollnumber, mobile, enabled, image, authority) values (:name, :username, :password, :rollnumber, :mobile, :enabled, :image, :authority)",
+				params) == 1;
 	}
+	
  
 	  @Override
 	    public void deleteUser(String username) {
@@ -64,26 +82,26 @@ public class UserDaoImp implements UserDao {
  
 
 	@Override
-	public User updateUser(User user) {
+	public void updateUser(User user) {
 		// TODO Auto-generated method stub
-		return null;
+		sessionFactory.getCurrentSession().update(user);
 	}
-
-/*	@Override
-	public User getUser(String username) {
-		 Session session = this.sessionFactory.getCurrentSession();  
-		  User user= (User) session.load(User.class, new String(username));  
-		  return user;  
-	}*/
-	
+ 
 	  @Override
 	    @SuppressWarnings("unchecked")
 	    public User getUser(String username) {
 	        Session session = sessionFactory.getCurrentSession();
-	        List<User> list = session.createQuery("from users u where u.username = :username")
+	        List<User> list = session.createQuery("from User u where u.username = :username")
 	            .setParameter("username", username)
 	            .list();
-	        return list.size() > 0 ?(Book)list.get(0): null;
+	        return list.size() > 0 ?(User)list.get(0): null;
 	    }
+	  
+	  @Override
+		public boolean exists(String username) {
+			return jdbc.queryForObject(
+					"select count(*) from users where username=:username",
+					new MapSqlParameterSource("username", username), Integer.class) > 0;
+		}
 
 }

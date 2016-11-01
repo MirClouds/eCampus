@@ -47,8 +47,7 @@
 	   <put-attribute name="content" value="/WEB-INF/tiles/added-students.jsp"></put-attribute>
  </definition>
  
-      <definition name="editsave" extends="base.ecampus">
-	  <put-attribute name="title" value="edit students"></put-attribute>
+ <definition name="useredit" extends="base.ecampus">
 	   <put-attribute name="content" value="/WEB-INF/tiles/useredit.jsp"></put-attribute>
  </definition>
 

@@ -1,4 +1,4 @@
-package com.sbbusba.ecampus.dao;
+package com.sbbusba.ecampus.model;
 
 import java.io.Serializable;
 
@@ -10,42 +10,45 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
-@Entity
-@Table(name="users")
-public class User implements Serializable  {
-	
-    private static final long serialVersionUID = -7988799579036225137L;
 
+@Entity
+@Table(name = "users")
+public class User implements Serializable {
 	
-	@NotBlank(message="Username cannot be blank.")
-	@Size(min=8, max=15, message="Username must be between 8 and 15 characters long.")
-	@Pattern(regexp="^\\w{8,}$", message="Username can only consist of numbers, letters and the underscore character.")
+	private static final long serialVersionUID = 5362437768854142524L;
+	@NotBlank(message = "Username cannot be blank.")
+	@Size(min = 8, max = 15, message = "Username must be between 8 and 15 characters long.")
+	@Pattern(regexp = "^\\w{8,}$", message = "Username can only consist of numbers, letters and the underscore character.")
 	@Id
-	@Column(name="username")
+	@Column(name = "username")
 	private String username;
-	
-	@Size(min=5, max=17, message="you must have 5 to 17 characters")
+
+	@Size(min = 5, max = 17, message = "you must have 5 to 17 characters")
+	@Column(name = "name")
 	private String name;
-	@Size(min=5, max=17, message="you must have 5 to 17 characters")
+	@Size(min = 5, max = 17, message = "you must have 5 to 17 characters")
+	@Column(name = "rollnumber")
 	private String rollnumber;
-	
-	
+
 	private String password;
 	private String mobile;
-	private String authority;
+
+	private String image;
 	private int enabled;
 	
-	
-	public User(){ }
-	
-	
-
  
+	private String authority;
 
-
+	
+	
+ 
+	
+	public User() {
+	}
 
 	public User(String username, String name, String rollnumber,
-			String password, String mobile, String authority, int enabled) {
+			String password, String mobile, String authority, String image,
+			int enabled) {
 		super();
 		this.username = username;
 		this.name = name;
@@ -53,14 +56,9 @@ public class User implements Serializable  {
 		this.password = password;
 		this.mobile = mobile;
 		this.authority = authority;
+		this.image = image;
 		this.enabled = enabled;
 	}
-
-
-
-
-
-
 
 	public String getName() {
 		return name;
@@ -110,44 +108,28 @@ public class User implements Serializable  {
 		this.enabled = enabled;
 	}
 
+	public String getImage() {
+		return image;
+	}
 
-
-
-
-
+	public void setImage(String image) {
+		this.image = image;
+	}
 
 	public String getAuthority() {
 		return authority;
 	}
 
-
-
-
-
-
-
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
 
-
-
-
-
-
-
 	@Override
 	public String toString() {
-		return "Student [username=" + username + ", name=" + name
+		return "User [username=" + username + ", name=" + name
 				+ ", rollnumber=" + rollnumber + ", password=" + password
 				+ ", mobile=" + mobile + ", authority=" + authority
-				+ ", enabled=" + enabled + "]";
+				+ ", image=" + image + ", enabled=" + enabled + "]";
 	}
-
-
-
-
-
-
 
 }

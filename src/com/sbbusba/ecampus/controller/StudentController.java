@@ -12,22 +12,24 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sbbusba.ecampus.dao.User;
-import com.sbbusba.ecampus.service.UserService;
+import com.sbbusba.ecampus.model.User;
+import com.sbbusba.ecampus.service.StudentService;
 
 @Controller
 public class StudentController {
-	private UserService userService;
+	private StudentService studentService;
 
- 
 	@Autowired
-	public void setStudentService(UserService userService) {
-		this.userService = userService;
+		public void setStudentService(StudentService studentService) {
+		this.studentService = studentService;
 	}
+
+	
+ 
 
 	@RequestMapping("students")
 	public String showhome(Model model) {
-		List<User> user = userService.getCurrentStudent();
+		List<User> user = studentService.getCurrentStudent();
 		model.addAttribute("student", user);
 		return "students";
 	}
@@ -49,13 +51,13 @@ public class StudentController {
 		
 		user.setAuthority("ROLE_STUDENT");
 		
-		if(userService.exists(user.getUsername())) {
+		if(studentService.exists(user.getUsername())) {
 			result.rejectValue("username", "DuplicateKey.user.username", "This username already exists!");
 			return "add-students";
 		}
 		
 		try {
-			userService.createStudents(user);
+			studentService.createStudents(user);
 		} catch (DuplicateKeyException e) {
 			result.rejectValue("username","DuplicateKey.user.username", "Username already exist!");
 			return "add-students";
@@ -63,5 +65,5 @@ public class StudentController {
 		
 		return "added-students";
 	}
-
+ 
 }

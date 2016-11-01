@@ -22,7 +22,7 @@
  </td> </tr>
 <tr>
 <td><label>Select Image : </label></td>
-<td><input type="file" name="image"/></td>
+<td><input type="file" name="image" value="test.jpg"/></td>
 </tr>
 <tr><td><input value="Add Student" type="submit" ></td> </tr>
 </table>

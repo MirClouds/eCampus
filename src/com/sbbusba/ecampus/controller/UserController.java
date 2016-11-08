@@ -23,7 +23,6 @@ public class UserController {
 
 	private UserServiceInterface userService;
 
-	 
 	@Autowired
 	public void setUserService(UserServiceInterface userService) {
 		this.userService = userService;
@@ -46,6 +45,8 @@ public class UserController {
 
 		List<User> user = userService.getAllUsers();
 		model.addAttribute("user", user);
+		model.addAttribute("addUser", new User());
+
 		return "users";
 	}
 

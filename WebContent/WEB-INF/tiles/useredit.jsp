@@ -6,11 +6,16 @@
 <table>
     <sf:hidden path="username" />  
     <sf:hidden path="password" />  
-
+<sf:hidden path="authority" />
 <tr><td>Name</td> <td>    <sf:input path="name" name="name" type="text"/><br/> <sf:errors path="name" cssClass="formError"></sf:errors></td></tr>
 <tr><td>Roll Number </td> <td><sf:input type="text"  path="rollnumber" name="rollnumber"/> </td> </tr>
 <tr><td>Mobile </td> <td><sf:input type="text" path="mobile"  name="mobile"/> </td> </tr>
-<tr><td>Authority </td> <td><sf:input type="text" path="authority"  name="authority"/> </td> </tr>
+<%-- <tr><td>Authority </td> <td>
+ <sf:select name="authority" path="authority">
+      <option value="ROLE_STUDENT">Student</option>
+  <option value="ROLE_TEACHER">Teacher</option>
+</sf:select> 
+ </td> </tr> --%>
 
 <tr><td>Currently Student? </td> <td>
 <sf:select name="enabled" path="enabled">

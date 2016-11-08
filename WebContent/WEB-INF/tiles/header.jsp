@@ -30,7 +30,7 @@
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li> <br/>
+      <li> <span style="color:white;">welcome <sec:authentication property="principal.username" /></span> <br/>
       <sec:authorize access="isAuthenticated()">
 <c:url var="logoutUrl" value="/logout"/>
 <form action="${logoutUrl}" method="post">

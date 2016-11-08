@@ -20,12 +20,9 @@ public class StudentController {
 	private StudentService studentService;
 
 	@Autowired
-		public void setStudentService(StudentService studentService) {
+	public void setStudentService(StudentService studentService) {
 		this.studentService = studentService;
 	}
-
-	
- 
 
 	@RequestMapping("students")
 	public String showhome(Model model) {
@@ -33,37 +30,39 @@ public class StudentController {
 		model.addAttribute("student", user);
 		return "students";
 	}
-	
+
 	@RequestMapping("add-students")
-	public String addStudents(Model model){
+	public String addStudents(Model model) {
 		model.addAttribute("user", new User());
 		return "add-students";
-	}	
- 
-	
-	@RequestMapping(value="added-students", method=RequestMethod.POST)
-	public String addedStudents(Model mode, @Valid User user, BindingResult result){
-		
+	}
+
+	@RequestMapping(value = "added-students", method = RequestMethod.POST)
+	public String addedStudents(Model mode, @Valid User user,
+			BindingResult result) {
+
 		if (result.hasErrors()) {
- 			return "add-students";
- 			
+			return "add-students";
+
 		}
-		
+
 		user.setAuthority("ROLE_STUDENT");
-		
-		if(studentService.exists(user.getUsername())) {
-			result.rejectValue("username", "DuplicateKey.user.username", "This username already exists!");
+
+		if (studentService.exists(user.getUsername())) {
+			result.rejectValue("username", "DuplicateKey.user.username",
+					"This username already exists!");
 			return "add-students";
 		}
-		
+
 		try {
 			studentService.createStudents(user);
 		} catch (DuplicateKeyException e) {
-			result.rejectValue("username","DuplicateKey.user.username", "Username already exist!");
+			result.rejectValue("username", "DuplicateKey.user.username",
+					"Username already exist!");
 			return "add-students";
 		}
-		
+
 		return "added-students";
 	}
- 
+
 }

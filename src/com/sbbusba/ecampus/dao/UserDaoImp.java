@@ -6,8 +6,8 @@ import javax.sql.DataSource;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -28,27 +28,33 @@ public class UserDaoImp implements UserDao {
 	public void setDataSource(DataSource jdbc) {
 		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
 	}
-	
-	public UserDaoImp() {
-        System.out.println("Working UserDaoImp");
-    }
-	
  
-	@Autowired  
-	 private SessionFactory sessionFactory;  
-	  
-	 public void setSessionFactory(SessionFactory sf) {  
-	  this.sessionFactory = sf;  
-	 } 
+	@Autowired
+	private SessionFactory sessionFactory;
+
+	private Session getCurrentSession() {
+		return sessionFactory.getCurrentSession();
+	}
+	/*
+	 * @Autowired private SessionFactory sessionFactory;
+	 * 
+	 * public void setSessionFactory(SessionFactory sf) { this.sessionFactory =
+	 * sf; }
+	 */
 
 
+
+/*	//Get the list of current all users 
+	List list = getSession().createCriteria("you.pakcage.hibernate.Example")
+            .add(Restrictions.ne("myProperty","blablabla"))
+            .list()*/
+	@SuppressWarnings("unchecked")
 	public List<User> getAllUser() {
 
-		return jdbc
-				.query("select * from users where authority != 'ROLE_ADMIN'",
-						BeanPropertyRowMapper.newInstance(User.class));
+		return getCurrentSession().createCriteria("com.sbbusba.ecampus.model.User").add(Restrictions.ne("authority", "ROLE_ADMIN")).list();
 	}
 
+	//add user
 	@Override
 	public boolean createUser(User student) {
 
@@ -64,44 +70,44 @@ public class UserDaoImp implements UserDao {
 		params.addValue("authority", student.getAuthority());
 		params.addValue("image", student.getImage());
 
-		
-		return jdbc.update(
-				"insert into users (name, username, password, rollnumber, mobile, enabled, image, authority) values (:name, :username, :password, :rollnumber, :mobile, :enabled, :image, :authority)",
-				params) == 1;
+		return jdbc
+				.update("insert into users (name, username, password, rollnumber, mobile, enabled, image, authority) values (:name, :username, :password, :rollnumber, :mobile, :enabled, :image, :authority)",
+						params) == 1;
 	}
-	
- 
-	  @Override
-	    public void deleteUser(String username) {
-		  Session session = this.sessionFactory.getCurrentSession();  
-		  User p = (User) session.load(User.class, new String(username));  
-		  if (null != p) {  
-		   session.delete(p);
 
-		 }}
- 
+	//delete record
+	@Override
+	public void deleteUser(String username) {
+		        User user = getUser(username);
+		        if (user != null)
+		            getCurrentSession().delete(user);
+	}
 
 	@Override
 	public void updateUser(User user) {
 		// TODO Auto-generated method stub
 		sessionFactory.getCurrentSession().update(user);
 	}
- 
-	  @Override
-	    @SuppressWarnings("unchecked")
-	    public User getUser(String username) {
-	        Session session = sessionFactory.getCurrentSession();
-	        List<User> list = session.createQuery("from User u where u.username = :username")
-	            .setParameter("username", username)
-	            .list();
-	        return list.size() > 0 ?(User)list.get(0): null;
-	    }
-	  
-	  @Override
-		public boolean exists(String username) {
-			return jdbc.queryForObject(
-					"select count(*) from users where username=:username",
-					new MapSqlParameterSource("username", username), Integer.class) > 0;
-		}
+
+	@Override
+	/*public User getUser(String username) {
+		Session session = sessionFactory.getCurrentSession();
+		List<User> list = session
+				.createQuery("from User u where u.username = :username")
+				.setParameter("username", username).list();
+		return list.size() > 0 ? (User) list.get(0) : null;
+	}*/
+	
+	public User getUser(String username) {
+        User user = (User) getCurrentSession().get(User.class, username);
+        return user;
+    }
+
+	@Override
+	public boolean exists(String username) {
+		return jdbc.queryForObject(
+				"select count(*) from users where username=:username",
+				new MapSqlParameterSource("username", username), Integer.class) > 0;
+	}
 
 }

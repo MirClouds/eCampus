@@ -1,6 +1,5 @@
 package com.sbbusba.ecampus.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -41,10 +40,10 @@ public class UserController {
 	}
 
 	@RequestMapping("users")
-	public String showAllUsers(Model model) {
-
-		List<User> user = userService.getAllUsers();
-		model.addAttribute("user", user);
+	public String showAllUsers(Model model, Integer offset, Integer maxResults) {
+		model.addAttribute("user", userService.getAllUsers(offset, maxResults));
+		model.addAttribute("count", userService.count());
+		model.addAttribute("offset", offset);
 		model.addAttribute("addUser", new User());
 
 		return "users";
@@ -72,9 +71,9 @@ public class UserController {
 	 */
 	@RequestMapping("/useredit/{username}")
 	public String getUser(@PathVariable("username") String username,
-			Map<String, Object> map) {
+			Map<String, Object> map, Integer offset, Integer maxResults) {
 		map.put("user", userService.getUser(username));
-		map.put("userList", userService.getAllUsers());
+		map.put("userList", userService.getAllUsers(offset, maxResults));
 		return "useredit";
 	}
 
@@ -94,6 +93,13 @@ public class UserController {
 			return "add-user";
 
 		}
+		String usere = user.getUsername();
+		if (userService.exists(usere)) {
+
+			System.out.println("exist user");
+			mode.addAttribute("msg", "user exist already");
+			return "add-user";
+		}
 
 		try {
 			userService.createUser(user);
@@ -101,6 +107,7 @@ public class UserController {
 		} catch (DuplicateKeyException e) {
 			result.rejectValue("username", "DuplicateKey.user.username",
 					"Username already exist!");
+
 			return "add-user";
 		}
 		return "redirect:/users";

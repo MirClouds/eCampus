@@ -16,6 +16,7 @@ public interface UserServiceInterface {
 
 	public boolean createUser(User user);
 	
-	public List<User> getAllUsers();
+	public List<User> getAllUsers(Integer offset, Integer maxResults);
+	public Long count();
 
 }

@@ -6,17 +6,16 @@
 
 
 
-<h1>Add Students</h1>
+<h1>Add User</h1>
 <sf:form method="post" action="${pageContext.request.contextPath}/added-user" commandName="user">
 <table>
 <tr><td>Name</td> <td>    <sf:input path="name" name="name" type="text"/><br/> <sf:errors path="name" cssClass="formError"></sf:errors></td></tr>
-<tr><td>Username </td><td><sf:input path="username" name="username" type="text" /><br/> <sf:errors path="username" cssClass="formError"> </sf:errors></td> </tr>
+<tr><td>Username </td><td><sf:input path="username" name="username" type="text" /><br/> <sf:errors path="username" cssClass="formError"> </sf:errors><span class="formError"> ${msg}</span></td> </tr>
 <tr><td>Roll Number </td> <td><sf:input type="text"  path="rollnumber" name="rollnumber"/> </td> </tr>
 <tr><td>Password </td> <td><sf:input type="text" path="password"  name="password"/> <br/> <sf:errors path="rollnumber" cssClass="formError"></sf:errors></td> </tr>
 <tr><td>Mobile </td> <td><sf:input type="text" path="mobile"  name="mobile"/> </td> </tr>
 <tr><td>Authority </td> <td>
  <sf:select name="authority" path="authority">
-  <option value="ROLE_STUDENT">Student</option>
   <option value="ROLE_TEACHER">Teacher</option>
 </sf:select> 
  </td> </tr>

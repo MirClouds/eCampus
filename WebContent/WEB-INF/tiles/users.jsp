@@ -2,6 +2,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="tag" uri="/WEB-INF/taglibs/customTaglib.tld"%>
+
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/static/css/style.css">
@@ -10,6 +12,7 @@
 <table class="table table-bordered">
 	<thead>
 		<tr>
+			<th>Sr.No </th>
 			<th>Name</th>
 			<th>Username</th>
 
@@ -21,8 +24,9 @@
 			<th>edit</th>
 		</tr>
 	</thead>
-	<c:forEach var="row" items="${user}">
+	<c:forEach var="row" items="${user}" varStatus="loop" >
 		<tr>
+		  <td> ${loop.count }</td>
 			<td>${row.name}</td>
 			<td>${row.username}</td>
 
@@ -40,6 +44,8 @@
 	</c:forEach>
 
 </table>
+<tag:paginate max="15" offset="${offset}" count="${count}"
+   uri="${pageContext.request.contextPath}/users" next="&raquo;" previous="&laquo;" />
 
   <!-- Modal Delete User-->
 
@@ -55,7 +61,7 @@
                 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-danger btn-ok">Delete</a>
+                    <a class="btn btn-danger btn-ook">Delete</a>
                 </div>
             </div>
         </div>
@@ -83,7 +89,6 @@
 <tr><td>Mobile </td> <td><sf:input type="text" path="mobile"  name="mobile"/> </td> </tr>
 <tr><td>Authority </td> <td>
  <sf:select name="authority" path="authority">
-  <option value="ROLE_STUDENT">Student</option>
   <option value="ROLE_TEACHER">Teacher</option>
 </sf:select> 
  </td> </tr>
@@ -113,8 +118,10 @@
 
     <script>
         $('#confirm-delete').on('show.bs.modal', function(e) {
-            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            $(this).find('.btn-ook').attr('href', $(e.relatedTarget).data('href'));
             
-            $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+            $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ook').attr('href') + '</strong>');
         });
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    

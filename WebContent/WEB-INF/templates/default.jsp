@@ -20,6 +20,7 @@
 	  <h2><a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/static/images/sbbu-logo.png" width="80" height="80"/></a>
 	  Shaheed Benazir Bhutto University <span style="font-size:16px;"> - Shaheed Benazirabad</span></h2>
  <!--   <h4><span class="titleecampus">e</span>Campus - The Manager</h4>-->
+ 
 </div>
 
 <div class="header"> <tiles:insertAttribute name="header"></tiles:insertAttribute></div>

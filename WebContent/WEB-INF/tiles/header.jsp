@@ -7,6 +7,7 @@
     <div class="navbar-header">
       <a class="navbar-brand" href="${pageContext.request.contextPath}">eCampus</a>
     </div>
+   <sec:authorize access="hasRole('ROLE_ADMIN')">
     <ul class="nav navbar-nav">
       <li class="active"><a href="${pageContext.request.contextPath}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
       <li><a href="#"><span class="glyphicon glyphicon-education"></span> Departments</a></li>
@@ -15,7 +16,7 @@
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="${pageContext.request.contextPath}/students">Students List</a></li>
-          <li><a href="${pageContext.request.contextPath}/add-students">Add Students</a></li>
+          <li><a href="${pageContext.request.contextPath}/add-student">Add Students</a></li>
       
         </ul>
       </li>
@@ -28,9 +29,15 @@
       
         </ul>
       </li>
-    </ul>
+    </ul>  </sec:authorize>
     <ul class="nav navbar-nav navbar-right">
-      <li> <span style="color:white;">welcome <sec:authentication property="principal.username" /></span> <br/>
+      <li> <span style="color:white;">
+
+    <sec:authorize access="isAuthenticated()">  
+        Welcome,   <strong><sec:authentication property="principal.username"/></strong>
+    </sec:authorize>
+
+</span> <br/>
       <sec:authorize access="isAuthenticated()">
 <c:url var="logoutUrl" value="/logout"/>
 <form action="${logoutUrl}" method="post">

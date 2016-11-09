@@ -25,9 +25,9 @@ public class UserService implements UserServiceInterface {
 
 	@Override
 	@Secured("ROLE_ADMIN")
-	public List<User> getAllUsers() {
+	public List<User> getAllUsers(Integer offset, Integer maxResults){
 
-		return userDaoImp.getAllUser();
+		return userDaoImp.getAllUser(offset, maxResults);
 	}
 
 	@Override
@@ -59,4 +59,10 @@ public class UserService implements UserServiceInterface {
 		return userDaoImp.createUser(user);
 
 	}
+	
+	@Override
+	public Long count(){
+		  return userDaoImp.count();
+		 }
+	
 }

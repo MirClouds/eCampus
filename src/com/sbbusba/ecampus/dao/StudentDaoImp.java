@@ -1,21 +1,23 @@
 package com.sbbusba.ecampus.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Repository;
 
-import com.sbbusba.ecampus.model.User;
+import com.sbbusba.ecampus.model.Student;
 
 @Component("studentDaoImp")
+@Repository
 public class StudentDaoImp implements StudentDao {
 
 	private NamedParameterJdbcTemplate jdbc;
@@ -28,9 +30,34 @@ public class StudentDaoImp implements StudentDao {
 		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
 	}
 
+	@Autowired
+	private SessionFactory sessionFactory;
+
+	private Session getCurrentSession() {
+		return sessionFactory.getCurrentSession();
+	}
+
 	@Override
-	@Transactional
-	public boolean createStudent(User student) {
+	@SuppressWarnings("unchecked")
+	public List<Student> getAllStudent(Integer offset, Integer maxResults) {
+
+		/*
+		 * return getCurrentSession()
+		 * .createCriteria("com.sbbusba.ecampus.model.Student")
+		 * .add(Restrictions.ne("authority", "ROLE_ADMIN")).list();
+		 */
+		// return getCurrentSession().createQuery("from Student").list();
+
+		return sessionFactory.openSession().createCriteria(Student.class)
+				
+				.setFirstResult(offset != null ? offset : 0)
+				.setMaxResults(maxResults != null ? maxResults : 10).list();
+
+	}
+
+	// add user
+	@Override
+	public boolean createStudent(Student student) {
 
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("name", student.getName());
@@ -44,65 +71,45 @@ public class StudentDaoImp implements StudentDao {
 		params.addValue("authority", student.getAuthority());
 		params.addValue("image", student.getImage());
 
-		jdbc.update(
-				"insert into users (name, username, password, rollnumber, mobile, enabled, image) values (:name, :username, :password, :rollnumber, :mobile, :enabled, :image)",
-				params);
+		student.setAuthority("ROLE_STUDENT");
 		return jdbc
-				.update("insert into authorities (username, authority) values (:username, :authority)",
+				.update("insert into student (name, username, password, rollnumber, mobile, enabled, image, authority) values (:name, :username, :password, :rollnumber, :mobile, :enabled, :image, 'ROLE_STUDENT')",
 						params) == 1;
 	}
-	
+
+	// delete record
 	@Override
-	public List<User> getAllStudents() {
-
-		return jdbc
-				.query("select * from users  where authority='ROLE_STUDENT'",
-						new RowMapper<User>() {
-
-							@Override
-							public User mapRow(ResultSet rs, int rowNum)
-									throws SQLException {
-								User user = new User();
-
-								user.setName(rs.getString("name"));
-								user.setUsername(rs.getString("username"));
-								user.setPassword(rs.getString("password"));
-								user.setRollnumber(rs.getString("rollnumber"));
-								user.setMobile(rs.getString("mobile"));
-								user.setEnabled(rs.getInt("enabled"));
-								 
-								return user;
-							}
-						});
-
+	public void deleteStudent(String username) {
+		Student student = getStudent(username);
+		if (student != null)
+			getCurrentSession().delete(student);
 	}
 
-	
+	@Override
+	public void updateStudent(Student student) {
+		// TODO Auto-generated method stub
+		sessionFactory.getCurrentSession().update(student);
+	}
 
 	@Override
-	public boolean exists(String username) {
+	public Student getStudent(String username) {
+		Student student = (Student) getCurrentSession().get(Student.class,
+				username);
+		return student;
+	}
+
+	@Override
+	public boolean existsStudent(String username) {
 		return jdbc.queryForObject(
-				"select count(*) from users where username=:username",
+				"select count(*) from student, users where student.username=:username OR users.username=:username",
 				new MapSqlParameterSource("username", username), Integer.class) > 0;
 	}
 
-
 	@Override
-	public boolean deleteStudent(String username) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public User updateStudent(User student) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public User getStudent(String username) {
-		// TODO Auto-generated method stub
-		return null;
+	public Long count() {
+		return (Long) sessionFactory.openSession()
+				.createCriteria(Student.class)
+				.setProjection(Projections.rowCount()).uniqueResult();
 	}
 
 }

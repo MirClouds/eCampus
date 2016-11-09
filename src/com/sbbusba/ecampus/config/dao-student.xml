@@ -27,6 +27,7 @@
         <property name="annotatedClasses">  
             <list>  
                 <value>com.sbbusba.ecampus.model.User</value>  
+                <value>com.sbbusba.ecampus.model.Student</value> 
             </list>  
         </property>  
         <property name="hibernateProperties">  

@@ -11,9 +11,16 @@
 <p><a href="${pageContext.request.contextPath}/users">All User List</a></p>
 </sec:authorize>
 
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+<p>Welcome Admin Portal</p> 
+</sec:authorize>
+<sec:authorize access="hasRole('ROLE_STUDENT')">
+<p>Welcome STUDENT Portal</p> 
+</sec:authorize>
 <sec:authorize access="hasRole('ROLE_TEACHER')">
 <p>Welcome Teacher Portal</p> 
 </sec:authorize>
+ 
 
 
 <h3>What is Lorem Ipsum?</h3>

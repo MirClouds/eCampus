@@ -1,0 +1,178 @@
+ 
+	/*
+
+
+
+	*/
+
+	.box
+	{
+		background-color: #598B9D;
+		height:380px;
+		margin-top:30px;
+		width:600px;
+		margin-left:170px;
+		margin-right:30px;
+		border-radius:20px;
+		box-shadow: 2px 2px 2px 2px White, 10px 10px 10px 10px rgba(255,255,255,0.10);
+		border: 2px solid grey;
+	}
+	.box table tr
+	{
+	height:70px;
+	}	
+	.box label
+	{
+	color:white;
+	padding-bottom:10px;
+	}
+	input.last
+	{
+	margin-top:20px;
+	}
+	/* Header */
+	
+	.attendence_status, .attendence_table
+	{
+	margin-left:45px;
+	border:1px solid darkgrey;	
+	margin-top:30px;
+	}
+	.attendence_status td, .attendence_table td
+	{
+	height:70px;
+	width:100px;
+	}
+	.attendence_table
+	{
+	border:none !important;
+	margin-left:83px;
+	
+	}
+	
+
+	.attendence_status2
+	{
+	width:10%;
+	height:60px;
+	margin-left:45px;
+	border:1px solid darkgrey;	
+	margin-top:30px;
+	}
+	
+	.present
+	{
+	border: 1px solid darkgrey;
+	text-align: center;
+	vertical-align:middle;
+	background-image:url(../images/present.jpg);
+	background-size:100%;
+	color:Black;
+	}
+	.all-present
+	{
+	border: 1px solid darkgrey;
+	text-align: center;
+	vertical-align:middle;
+	background-color:rgb(255,255,255 );
+	color:Black;
+	}
+	.present , .absent
+	{
+	cursor:pointer;
+	}
+
+	.all-present 
+	{
+	cursor:pointer;
+	}
+	.add-subject-table
+	{
+	width:35%;
+	margin-bottom:0px;
+	margin-left:300px;
+	}
+	.add-subject-table td
+	{
+	height:40px;
+	}
+	.logout-link
+	{
+	margin-top:13px;
+	margin-left:16px;
+	margin-right:10px;
+	padding:7.5px;
+	min-width:100px;
+	border-radius:5px;
+	border:solid 1px Grey;
+	background-color:rgb(80,200,220);
+	text-decoration:none;
+	}
+	.absent
+	{
+	border: 1px solid darkgrey;
+	text-align: center;
+	vertical-align:middle;
+	background-image:url(../images/absent.jpg);
+	background-size:100%;
+	color:Black;
+	}
+	.content h4
+	{
+	color:rgb(0,60,80);
+	text-align:left;
+	margin-bottom:20px;
+	padding-top: 30px;
+	margin-left:30px;
+	font-size:25px;
+	}
+	.content h5
+	{
+	color:rgb(0,60,80);
+	text-align:left;
+	margin-bottom:5px;
+	padding-top: 10px;
+	margin-left:30px;
+	font-size:18px;
+	}
+	.fail-td td a
+	{
+	color:white;
+	}
+	.even
+	{
+	background-color:rgba(0,120,160,0.3);
+	}
+	.odd
+	{
+	background-color:rgba(0,160,200,0.3);
+	}
+	.fail-td
+	{
+	background-color: #b3574e;
+	color:white;
+	}
+	.fail-prc
+	{
+	color:rgb(155,0,0);
+	}
+	.total-row
+	{
+	background-color:rgb(0,120,200);
+	color:white;
+	}
+	body .student-view-table
+	{
+	border:solid 1px rgb(0,60,80);
+	margin-left:30px;
+	width:90%;
+	}
+	.attendence-table
+	{
+	border:solid 1px rgb(0,60,80);
+	margin-left:30px;
+	width:50%;
+	
+	margin-top:10px;
+	}
+

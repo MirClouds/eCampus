@@ -4,6 +4,7 @@
       <h1>Edit User</h1>
 <sf:form method="post" action="${pageContext.request.contextPath}/AddORUpdate" modelAttribute="user">
 <table>
+ <sf:hidden path="user_id" />  
     <sf:hidden path="username" />  
     <sf:hidden path="password" />  
 <sf:hidden path="authority" />

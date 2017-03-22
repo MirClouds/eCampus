@@ -34,10 +34,10 @@
 			<td>${row.mobile}</td>
 			<td>${row.enabled}</td>
 			<td>${row.authority}</td>
-			<td><button class="btn btn-danger" data-href="delete/${row.username}" data-toggle="modal" data-target="#confirm-delete">
+			<td><button class="btn btn-danger" data-href="delete/${row.user_id}" data-toggle="modal" data-target="#confirm-delete">
         Delete record
     </button></td>
-			<td><a class="btn btn-info"  href="useredit/<c:out value='${row.username}'/>">Edit Record</a></td>
+			<td><a class="btn btn-info"  href="useredit/<c:out value='${row.user_id}'/>">Edit Record</a></td>
 			
 
 		</tr>

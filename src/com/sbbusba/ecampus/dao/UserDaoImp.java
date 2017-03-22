@@ -82,8 +82,8 @@ public class UserDaoImp implements UserDao {
 
 	// delete record
 	@Override
-	public void deleteUser(String username) {
-		User user = getUser(username);
+	public void deleteUser(int user_id) {
+		User user = getUser(user_id);
 		if (user != null)
 			getCurrentSession().delete(user);
 	}
@@ -102,16 +102,18 @@ public class UserDaoImp implements UserDao {
 	 * .setParameter("username", username).list(); return list.size() > 0 ?
 	 * (User) list.get(0) : null; }
 	 */
-	public User getUser(String username) {
-		User user = (User) getCurrentSession().get(User.class, username);
+	public User getUser(int user_id) {
+		User user = (User) getCurrentSession().get(User.class, user_id);
 		return user;
 	}
 
 	@Override
 	public boolean exists(String username) {
-		return jdbc.queryForObject(
-				"select count(*) from student, users where student.username=:username OR users.username=:username",
-				new MapSqlParameterSource("username", username), Integer.class) > 0;
+		return jdbc
+				.queryForObject(
+						"select count(*) from student, users where student.username=:username OR users.username=:username",
+						new MapSqlParameterSource("username", username),
+						Integer.class) > 0;
 
 	}
 

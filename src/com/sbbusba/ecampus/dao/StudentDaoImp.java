@@ -7,13 +7,13 @@ import javax.sql.DataSource;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import com.sbbusba.ecampus.model.Semester;
 import com.sbbusba.ecampus.model.Student;
 
 @Component("studentDaoImp")
@@ -49,60 +49,70 @@ public class StudentDaoImp implements StudentDao {
 		// return getCurrentSession().createQuery("from Student").list();
 
 		return sessionFactory.openSession().createCriteria(Student.class)
-				
-				.setFirstResult(offset != null ? offset : 0)
+
+		.setFirstResult(offset != null ? offset : 0)
 				.setMaxResults(maxResults != null ? maxResults : 10).list();
 
 	}
 
 	// add user
 	@Override
-	public boolean createStudent(Student student) {
+	public void createStudent(Student student) {
 
-		MapSqlParameterSource params = new MapSqlParameterSource();
-		params.addValue("name", student.getName());
-		params.addValue("username", student.getUsername());
-		params.addValue("password",
-				passwordEncoder.encode(student.getPassword()));
-
-		params.addValue("rollnumber", student.getRollnumber());
-		params.addValue("mobile", student.getMobile());
-		params.addValue("enabled", student.getEnabled());
-		params.addValue("authority", student.getAuthority());
-		params.addValue("image", student.getImage());
-
+		/*
+		 * MapSqlParameterSource params = new MapSqlParameterSource();
+		 * params.addValue("name", student.getName());
+		 * params.addValue("username", student.getUsername());
+		 * params.addValue("password",
+		 * passwordEncoder.encode(student.getPassword()));
+		 * 
+		 * params.addValue("rollnumber", student.getRollnumber());
+		 * params.addValue("mobile", student.getMobile());
+		 * params.addValue("enabled", student.getEnabled());
+		 * params.addValue("authority", student.getAuthority());
+		 * params.addValue("image", student.getImage());
+		 * //params.addValue("semester_id", student.getSemester_id());
+		 * student.setAuthority("ROLE_STUDENT"); return jdbc .update(
+		 * "insert into student (name, username, password, rollnumber, mobile, enabled, image, authority, semester_id) values (:name, :username, :password, :rollnumber, :mobile, :enabled, :image, 'ROLE_STUDENT', (select semester_id from semester where semester_id = :semester_id))"
+		 * , params) == 1;
+		 */
 		student.setAuthority("ROLE_STUDENT");
-		return jdbc
-				.update("insert into student (name, username, password, rollnumber, mobile, enabled, image, authority) values (:name, :username, :password, :rollnumber, :mobile, :enabled, :image, 'ROLE_STUDENT')",
-						params) == 1;
+		student.setPassword(passwordEncoder.encode(student.getPassword()));
+		 sessionFactory.getCurrentSession().save(student);
 	}
 
 	// delete record
 	@Override
-	public void deleteStudent(String username) {
-		Student student = getStudent(username);
+	public void deleteStudent(int student_id) {
+		Student student = getStudent(student_id);
 		if (student != null)
+
 			getCurrentSession().delete(student);
+
 	}
 
 	@Override
 	public void updateStudent(Student student) {
-		// TODO Auto-generated method stub
-		sessionFactory.getCurrentSession().update(student);
+ 
+		 
+	 sessionFactory.getCurrentSession().update(student); 
 	}
 
 	@Override
-	public Student getStudent(String username) {
-		Student student = (Student) getCurrentSession().get(Student.class,
-				username);
-		return student;
+	public Student getStudent(int student_id) {
+		
+		/*Student student = (Student) getCurrentSession().get(Student.class,
+				student_id);*/
+		return (Student) sessionFactory.getCurrentSession().get(Student.class, student_id);
 	}
 
 	@Override
 	public boolean existsStudent(String username) {
-		return jdbc.queryForObject(
-				"select count(*) from student, users where student.username=:username OR users.username=:username",
-				new MapSqlParameterSource("username", username), Integer.class) > 0;
+		return jdbc
+				.queryForObject(
+						"select count(*) from student, users where student.username=:username OR users.username=:username",
+						new MapSqlParameterSource("username", username),
+						Integer.class) > 0;
 	}
 
 	@Override

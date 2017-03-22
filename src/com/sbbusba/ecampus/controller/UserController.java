@@ -55,9 +55,9 @@ public class UserController {
 		return "add-user";
 	}
 
-	@RequestMapping(value = { "/delete/{username}" }, method = RequestMethod.GET)
-	public String deleteUser(@PathVariable String username) {
-		userService.deleteUser(username);
+	@RequestMapping(value = { "/delete/{user_id}" }, method = RequestMethod.GET)
+	public String deleteUser(@PathVariable int user_id) {
+		userService.deleteUser(user_id);
 		return "redirect:/users";
 	}
 
@@ -69,10 +69,10 @@ public class UserController {
 	 * //model.addAttribute("listOfCountries", this.userService.getAllUsers());
 	 * return "useredit"; }
 	 */
-	@RequestMapping("/useredit/{username}")
-	public String getUser(@PathVariable("username") String username,
+	@RequestMapping("/useredit/{user_id}")
+	public String getUser(@PathVariable("user_id") int user_id,
 			Map<String, Object> map, Integer offset, Integer maxResults) {
-		map.put("user", userService.getUser(username));
+		map.put("user", userService.getUser(user_id));
 		map.put("userList", userService.getAllUsers(offset, maxResults));
 		return "useredit";
 	}
@@ -105,7 +105,7 @@ public class UserController {
 			userService.createUser(user);
 
 		} catch (DuplicateKeyException e) {
-			result.rejectValue("username", "DuplicateKey.user.username",
+			result.rejectValue("user_id", "DuplicateKey.user.user_id",
 					"Username already exist!");
 
 			return "add-user";

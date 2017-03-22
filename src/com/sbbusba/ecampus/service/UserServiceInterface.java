@@ -6,9 +6,9 @@ import com.sbbusba.ecampus.model.User;
 
 public interface UserServiceInterface {
 
-	public void deleteUser(String username);
+	public void deleteUser(int user_id);
 
-	public User getUser(String username);
+	public User getUser(int user_id);
 
 	public void updateUser(User user);
 

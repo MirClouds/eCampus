@@ -33,16 +33,16 @@ public class StudentService implements StudentServiceInterface {
 
 	@Override
 	@Secured("ROLE_ADMIN")
-	public void deleteStudent(String username) {
+	public void deleteStudent(int student_id) {
 
-		studentDaoImp.deleteStudent(username);
+		studentDaoImp.deleteStudent(student_id);
 	}
 
 	@Override
 	@Secured("ROLE_ADMIN")
-	public Student getStudent(String username) {
+	public Student getStudent(int student_id) {
 
-		return studentDaoImp.getStudent(username);
+		return studentDaoImp.getStudent(student_id);
 	}
 
 	@Override
@@ -60,8 +60,8 @@ public class StudentService implements StudentServiceInterface {
 
 	@Override
 	@Secured("ROLE_ADMIN")
-	public boolean createStudent(Student student) {
-		return studentDaoImp.createStudent(student);
+	public void createStudent(Student student) {
+		 studentDaoImp.createStudent(student);
 
 	}
 	

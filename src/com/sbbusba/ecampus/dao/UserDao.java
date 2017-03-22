@@ -8,7 +8,7 @@ public interface UserDao {
 
 	public boolean createUser(User user);
 
-	public void deleteUser(String username);
+	public void deleteUser(int user_id);
 
 	public List<User> getAllUser(Integer offset, Integer maxResults);
 
@@ -16,7 +16,7 @@ public interface UserDao {
 
 	public void updateUser(User user);
 
-	public User getUser(String username);
+	public User getUser(int user_id);
 
 	public boolean exists(String username);
 

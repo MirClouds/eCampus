@@ -6,15 +6,15 @@ import com.sbbusba.ecampus.model.Student;
 
 public interface StudentServiceInterface {
 
-	public void deleteStudent(String username);
+	public void deleteStudent(int student_id);
 
-	public Student getStudent(String username);
+	public Student getStudent(int student_id);
 
 	public void updateStudent(Student student);
 
 	public boolean existsStudent(String username);
 
-	public boolean createStudent(Student student);
+	public void createStudent(Student student);
 
 	public List<Student> getAllStudent(Integer offset, Integer maxResults);
 	public Long count();

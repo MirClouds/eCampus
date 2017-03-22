@@ -19,7 +19,7 @@ import com.sbbusba.ecampus.service.StudentServiceInterface;
 
 @Controller
 public class StudentController {
-	
+
 	private StudentServiceInterface studentService;
 
 	@Autowired
@@ -28,37 +28,45 @@ public class StudentController {
 	}
 
 	@RequestMapping("students")
-	public String showAllStudents(Model model, Integer offset, Integer maxResults){
-		  model.addAttribute("student", studentService.getAllStudent(offset, maxResults));
-		  model.addAttribute("count", studentService.count());
-		  model.addAttribute("offset", offset);
-		  model.addAttribute("addStudent", new Student());
-		  return "students";
+	public String showAllStudents(Model model, Integer offset,
+			Integer maxResults) {
+		model.addAttribute("student",
+				studentService.getAllStudent(offset, maxResults));
+		model.addAttribute("count", studentService.count());
+		model.addAttribute("offset", offset);
+		model.addAttribute("addStudent", new Student());
+		return "students";
 	}
 
 	@RequestMapping("add-student")
 	public String AddStudent(Model model) {
-		model.addAttribute("addStudent", new Student());
+		model.addAttribute("student", new Student());
 		return "add-student";
 	}
 
-	@RequestMapping(value = { "/deleteStudent/{username}" }, method = RequestMethod.GET)
-	public String deleteStudent(@PathVariable String username) {
-		studentService.deleteStudent(username);
+	@RequestMapping(value = { "/deleteStudent/{student_id}" }, method = RequestMethod.GET)
+	public String deleteStudent(@PathVariable int student_id) {
+		studentService.deleteStudent(student_id);
 		return "redirect:/students";
 	}
 
- 
-	@RequestMapping("/studentsedit/{username}")
-	public String getStudent(@PathVariable("username") String username,
-			Map<String, Object> map, Integer offset, Integer maxResults) {
-		map.put("student", studentService.getStudent(username));
-		 map.put("studentList", studentService.getAllStudent(offset, maxResults));
+	@RequestMapping("/studentedit/{student_id}")
+	public String getStudent(@PathVariable("student_id") int student_id,
+			Map<String, Object> map, Integer offset, Integer maxResults, Model model) {
+		
+		 // Retrieve credit card by id
+	     Student student = studentService.getStudent(student_id);
+	 
+	     // Add to model
+	     model.addAttribute("student", student);
+	     
+/*		map.put("student", studentService.getStudent(student_id));
+*/		map.put("studentList", studentService.getAllStudent(offset, maxResults));
 		return "studentedit";
 	}
 
 	@RequestMapping(value = "/updateStudents", method = RequestMethod.POST)
-	public String addBook(@ModelAttribute("student") Student student,
+	public String updateStudent(@ModelAttribute("student") Student student,
 			BindingResult result) {
 
 		studentService.updateStudent(student);
@@ -67,7 +75,8 @@ public class StudentController {
 	}
 
 	@RequestMapping(value = "added-students", method = RequestMethod.POST)
-	public String addedStudent(Model mode, @Valid Student student, BindingResult result) {
+	public String addedStudent(Model mode, @Valid Student student,
+			BindingResult result) {
 
 		if (result.hasErrors()) {
 			return "add-student";
@@ -75,18 +84,18 @@ public class StudentController {
 		}
 		String usere = student.getUsername();
 		if (studentService.existsStudent(usere)) {
-		
+
 			System.out.println("exist user");
-			
+
 			mode.addAttribute("msg", "user exist already");
-			mode.addAttribute("addStudent", student);
+			// mode.addAttribute("addStudent", student);
 			return "add-student";
 		}
 		try {
 			studentService.createStudent(student);
 
 		} catch (DuplicateKeyException e) {
-			result.rejectValue("username", "DuplicateKey.student.username",
+			result.rejectValue("student_id", "DuplicateKey.student.student_id",
 					"Username already exist!");
 			return "add-student";
 		}

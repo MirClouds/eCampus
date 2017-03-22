@@ -50,6 +50,10 @@
  <definition name="useredit" extends="base.ecampus">
 	   <put-attribute name="content" value="/WEB-INF/tiles/useredit.jsp"></put-attribute>
  </definition>
+ 
+  <definition name="studentedit" extends="base.ecampus">
+	   <put-attribute name="content" value="/WEB-INF/tiles/studentedit.jsp"></put-attribute>
+ </definition>
 
      <definition name="add-user" extends="base.ecampus">
 	  <put-attribute name="title" value="add users"></put-attribute>
@@ -59,6 +63,11 @@
          <definition name="403" extends="base.ecampus">
 	  <put-attribute name="title" value="Access Denied..."></put-attribute>
 	   <put-attribute name="content" value="/WEB-INF/tiles/403.jsp"></put-attribute>
+ </definition>
+ 
+          <definition name="addAttendance" extends="base.ecampus">
+	  <put-attribute name="title" value="add Attendance"></put-attribute>
+	   <put-attribute name="content" value="/WEB-INF/tiles/addAttendance.jsp"></put-attribute>
  </definition>
     
   </tiles-definitions>

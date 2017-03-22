@@ -3,7 +3,13 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tag" uri="/WEB-INF/taglibs/customTaglib.tld"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.css">
+
+<%-- <sql:query dataSource="jdbc/spring" var="result">
+SELECT * from semester;
+</sql:query> --%>
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/static/css/style.css">
@@ -37,10 +43,10 @@
 			<td>${row.mobile}</td>
 			<td>${row.enabled}</td>
 			 
-			<td><button class="btn btn-danger" data-href="deleteStudent/${row.username}" data-toggle="modal" data-target="#confirm-delete">
+			<td><button class="btn btn-danger" data-href="deleteStudent/${row.student_id}" data-toggle="modal" data-target="#confirm-delete">
         Delete record
     </button></td>
-			<td><a class="btn btn-info"  href="studentedit/<c:out value='${row.username}'/>">Edit Record</a></td>
+			<td><a class="btn btn-info"  href="studentedit/<c:out value='${row.student_id}'/>">Edit Record</a></td>
 			
 
 		</tr>
@@ -71,7 +77,7 @@
 
 
 
-  <!-- Modal Add User-->
+ <%--  <!-- Modal Add User-->
   <div class="modal fade" id="addStudent" role="dialog">
     <div class="modal-dialog">
     
@@ -95,6 +101,15 @@
   <option value="0">No</option>
 </sf:select>
  </td> </tr>
+  <tr><td>Semester </td> <td>
+<sf:select name="semester_id" path="semester_id">
+ <c:forEach var="rowsr" items="${result.rows}">
+ 
+		<option value="${rowsr.semester_id}">${rowsr.semester_id}</option>
+			</c:forEach>
+</sf:select>
+
+ </td> </tr>
 <tr>
 <td><label>Select Image : </label></td>
 <td><input type="file" name="image" value="test.jpg"/></td>
@@ -112,7 +127,7 @@
       
     </div>
   </div>
-
+ --%>
 
     <script>
         $('#confirm-delete').on('show.bs.modal', function(e) {

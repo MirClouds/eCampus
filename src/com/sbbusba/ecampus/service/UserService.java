@@ -25,21 +25,21 @@ public class UserService implements UserServiceInterface {
 
 	@Override
 	@Secured("ROLE_ADMIN")
-	public List<User> getAllUsers(Integer offset, Integer maxResults){
+	public List<User> getAllUsers(Integer offset, Integer maxResults) {
 
 		return userDaoImp.getAllUser(offset, maxResults);
 	}
 
 	@Override
-	public void deleteUser(String username) {
+	public void deleteUser(int user_id) {
 
-		userDaoImp.deleteUser(username);
+		userDaoImp.deleteUser(user_id);
 	}
 
 	@Override
-	public User getUser(String username) {
+	public User getUser(int user_id) {
 
-		return userDaoImp.getUser(username);
+		return userDaoImp.getUser(user_id);
 	}
 
 	@Override
@@ -59,10 +59,10 @@ public class UserService implements UserServiceInterface {
 		return userDaoImp.createUser(user);
 
 	}
-	
+
 	@Override
-	public Long count(){
-		  return userDaoImp.count();
-		 }
-	
+	public Long count() {
+		return userDaoImp.count();
+	}
+
 }

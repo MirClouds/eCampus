@@ -16,7 +16,6 @@
 		expected-type="javax.sql.DataSource">
 	</jee:jndi-lookup>
 	
-	
 
     <tx:annotation-driven transaction-manager="transactionManager" />
 	
@@ -28,6 +27,8 @@
             <list>  
                 <value>com.sbbusba.ecampus.model.User</value>  
                 <value>com.sbbusba.ecampus.model.Student</value> 
+                   <value>com.sbbusba.ecampus.model.Attendance</value> 
+                       <value>com.sbbusba.ecampus.model.Semester</value>
             </list>  
         </property>  
         <property name="hibernateProperties">  

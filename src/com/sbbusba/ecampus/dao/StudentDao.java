@@ -6,13 +6,13 @@ import com.sbbusba.ecampus.model.Student;
 
 public interface StudentDao {
 
-	public boolean createStudent(Student student);
+	public void createStudent(Student student);
 
-	public void deleteStudent(String username);
+	public void deleteStudent(int student_id);
 
 	public void updateStudent(Student user);
 
-	public Student getStudent(String username);
+	public Student getStudent(int student_id);
 
 	public boolean existsStudent(String username);
 

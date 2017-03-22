@@ -1,68 +1,16 @@
-
-
-<body lang=EN-MY style='tab-interval:36.0pt'>
-
 <div class=WordSection1>
 
-<p class=MsoNormal style='margin:0cm;margin-bottom:.0001pt;line-height:normal'><i><span
-style='font-size:28.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-"Times New Roman";color:black;mso-ansi-language:EN-MY;mso-fareast-language:
-EN-MY;mso-bidi-language:AR-SA'>e</span></i><span style='font-size:28.0pt;
-font-family:"Calibri","sans-serif";mso-fareast-font-family:"Times New Roman";
-color:black;mso-ansi-language:EN-MY;mso-fareast-language:EN-MY;mso-bidi-language:
-AR-SA'>Campus </span><span style='font-size:12.0pt;font-family:"Times New Roman","serif";
-mso-fareast-font-family:"Times New Roman";color:windowtext;mso-ansi-language:
-EN-MY;mso-fareast-language:EN-MY;mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+<h1>Campus </h1>
 
-<p class=MsoNormal style='margin:0cm;margin-bottom:.0001pt;line-height:normal'><span
-style='font-size:12.0pt;font-family:"Times New Roman","serif";mso-fareast-font-family:
-"Times New Roman";color:windowtext;mso-ansi-language:EN-MY;mso-fareast-language:
-EN-MY;mso-bidi-language:AR-SA'><o:p>&nbsp;</o:p></span></p>
+<h3>About</h3>
 
-<p class=MsoNormal style='margin:0cm;margin-bottom:.0001pt;line-height:normal'><span
-style='font-size:16.0pt;font-family:"Arial","sans-serif";mso-fareast-font-family:
-"Times New Roman";color:#C34500;mso-ansi-language:EN-MY;mso-fareast-language:
-EN-MY;mso-bidi-language:AR-SA'>About</span><span style='font-size:12.0pt;
-font-family:"Times New Roman","serif";mso-fareast-font-family:"Times New Roman";
-color:windowtext;mso-ansi-language:EN-MY;mso-fareast-language:EN-MY;mso-bidi-language:
-AR-SA'><o:p></o:p></span></p>
 
-<p class=MsoNormal style='margin:0cm;margin-bottom:.0001pt;line-height:normal'><span
-style='font-size:12.0pt;font-family:"Times New Roman","serif";mso-fareast-font-family:
-"Times New Roman";color:windowtext;mso-ansi-language:EN-MY;mso-fareast-language:
-EN-MY;mso-bidi-language:AR-SA'><o:p>&nbsp;</o:p></span></p>
+<p>eCampus is the platform for the university where
+students and staff can collaborate to each other. </p>
 
-<p class=MsoNormal style='margin-top:0cm;margin-right:7.0pt;margin-bottom:0cm;
-margin-left:0cm;margin-bottom:.0001pt;line-height:normal'><span
-style='font-size:11.0pt;font-family:"Arial","sans-serif";mso-fareast-font-family:
-"Times New Roman";color:black;mso-ansi-language:EN-MY;mso-fareast-language:
-EN-MY;mso-bidi-language:AR-SA'>eCampus is the platform for the university where
-students and staff can collaborate to each other. </span><span
-style='font-size:12.0pt;font-family:"Times New Roman","serif";mso-fareast-font-family:
-"Times New Roman";color:windowtext;mso-ansi-language:EN-MY;mso-fareast-language:
-EN-MY;mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+<h4>Technologies:</h4>
 
-<p class=MsoNormal style='margin:0cm;margin-bottom:.0001pt;line-height:normal'><span
-style='font-size:12.0pt;font-family:"Times New Roman","serif";mso-fareast-font-family:
-"Times New Roman";color:windowtext;mso-ansi-language:EN-MY;mso-fareast-language:
-EN-MY;mso-bidi-language:AR-SA'><o:p>&nbsp;</o:p></span></p>
-
-<p class=MsoNormal style='margin:0cm;margin-bottom:.0001pt;line-height:normal'><span
-style='font-size:16.0pt;font-family:"Arial","sans-serif";mso-fareast-font-family:
-"Times New Roman";color:#C34500;mso-ansi-language:EN-MY;mso-fareast-language:
-EN-MY;mso-bidi-language:AR-SA'>Technologies:</span><span style='font-size:12.0pt;
-font-family:"Times New Roman","serif";mso-fareast-font-family:"Times New Roman";
-color:windowtext;mso-ansi-language:EN-MY;mso-fareast-language:EN-MY;mso-bidi-language:
-AR-SA'><o:p></o:p></span></p>
-
-<p class=MsoNormal style='margin-top:0cm;margin-right:36.0pt;margin-bottom:
-0cm;margin-left:36.0pt;margin-bottom:.0001pt;text-align:justify;line-height:
-normal'><span style='font-size:10.5pt;font-family:"Arial","sans-serif";
-mso-fareast-font-family:"Times New Roman";color:black;mso-ansi-language:EN-MY;
-mso-fareast-language:EN-MY;mso-bidi-language:AR-SA'>Programming Language: JAVA</span><span
-style='font-size:12.0pt;font-family:"Times New Roman","serif";mso-fareast-font-family:
-"Times New Roman";color:windowtext;mso-ansi-language:EN-MY;mso-fareast-language:
-EN-MY;mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+<p> Programming Language: JAVA</p>
 
 <p class=MsoNormal style='margin-top:0cm;margin-right:36.0pt;margin-bottom:
 0cm;margin-left:36.0pt;margin-bottom:.0001pt;text-align:justify;line-height:
